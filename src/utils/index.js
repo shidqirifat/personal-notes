@@ -11,7 +11,7 @@ const getInitialData = () => ([
     title: "Functional Component",
     body: "Functional component merupakan React component yang dibuat menggunakan fungsi JavaScript. Agar fungsi JavaScript dapat disebut component ia harus mengembalikan React element dan dipanggil layaknya React component.",
     createdAt: '2022-04-14T04:27:34.572Z',
-    archived: false,
+    archived: true,
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const getInitialData = () => ([
     title: "Lifecycle",
     body: "Dalam konteks React component, lifecycle merupakan kumpulan method yang menjadi siklus hidup mulai dari component dibuat (constructor), dicetak (render), pasca-cetak (componentDidMount), dan sebagainya. ",
     createdAt: '2022-04-14T04:27:34.572Z',
-    archived: false,
+    archived: true,
   },
   {
     id: 5,
@@ -43,6 +43,48 @@ const getInitialData = () => ([
   },
 ]);
 
+const getFilter = () => ([
+  {
+    text: "All Notes",
+    value: "all"
+  },
+  {
+    text: "Active Notes",
+    value: "active"
+  },
+  {
+    text: "Archived Notes",
+    value: "archived"
+  },
+])
+
+const generateQuotes = () => ([
+  {
+    text: "I haven’t failed. I’ve just found 10.000 ways that won’t work.",
+    author: "Thomas Alva Edison"
+  },
+  {
+    text: "However difficult life may seem, there is always something you can do and succeed at. It matters that you don’t just give up.",
+    author: "Stephen Hawking"
+  },
+  {
+    text: "Try not to become a man of success, but rather try to become a man of value.",
+    author: "Albert Einstein"
+  },
+  {
+    text: "The only way to di great work is to love what you do.",
+    author: "Steve Jobs"
+  },
+  {
+    text: "A new idea must not be judged by its immediate results.",
+    author: "Nikolas Tesla"
+  },
+  {
+    text: "Di mana pun engkau berada selalulah menjadi yang terbaik dan berikan yang terbaik dari yang bisa kau berikan",
+    author: "B.J Habibie"
+  },
+])
+
 const showFormattedDate = (date) => {
   const options = {
     weekday: "long",
@@ -53,4 +95,4 @@ const showFormattedDate = (date) => {
   return new Date(date).toLocaleDateString("id-ID", options)
 }
 
-export { getInitialData, showFormattedDate };
+export { getInitialData, getFilter, generateQuotes, showFormattedDate };
