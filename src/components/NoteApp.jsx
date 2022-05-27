@@ -7,6 +7,7 @@ import Header from "./Header";
 import NewNote from "./NewNote";
 import EditNote from "./EditNote";
 import WrapCardNote from "./WrapCardNote";
+import Footer from "./Footer";
 
 export default class NoteApp extends Component {
     constructor(props) {
@@ -293,6 +294,7 @@ export default class NoteApp extends Component {
                             idMenuActive={this.state.idMenuActive}
                         />
                     </div>
+                    <Footer />
                     <ButtonAddNewNote onClick={this.handleOpenAddNote} />
                 </div>
             </>
