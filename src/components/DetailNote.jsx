@@ -4,7 +4,7 @@ import ButtonAction from "./ButtonAction";
 import Text from "./Text";
 
 export default function DetailNote({
-    handleOpenDetailNote,
+    onOpenDetailNote,
     onEditNote,
     title,
     createdAt,
@@ -15,7 +15,7 @@ export default function DetailNote({
         <>
             <div
                 className="shadow-overlay"
-                onClick={() => handleOpenDetailNote(null)}
+                onClick={() => onOpenDetailNote(null)}
             />
             <div className="new-note-wrapper detail-note-wrapper">
                 <div className="detail-note">
@@ -60,7 +60,7 @@ export default function DetailNote({
                     </ButtonAction>
                     <ButtonAction
                         style={{ width: "max-content", padding: "8px 16px" }}
-                        onClick={() => handleOpenDetailNote(null)}
+                        onClick={() => onOpenDetailNote(null)}
                         isPrimary
                     >
                         Close

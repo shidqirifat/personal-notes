@@ -3,14 +3,14 @@ import Text from "./Text";
 
 export default function FilterButton({
     value,
-    setFilter,
+    onSetFilterNotes,
     currentFilter,
     children,
     style,
 }) {
     return (
         <div
-            onClick={() => setFilter(value)}
+            onClick={() => onSetFilterNotes(value)}
             className={`filter-button ${
                 currentFilter === value ? "active" : ""
             }`}

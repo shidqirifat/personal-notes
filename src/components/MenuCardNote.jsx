@@ -1,11 +1,16 @@
 import React from "react";
 import Text from "./Text";
 
-export default function MenuCardNote({ onDelete, onArchive, archived, id }) {
+export default function MenuCardNote({
+    onDeleteNote,
+    onArchiveNote,
+    archived,
+    id,
+}) {
     return (
         <div className="wrap-menu-card">
             <Text
-                onClick={(e) => onDelete(e, id)}
+                onClick={(e) => onDeleteNote(e, id)}
                 style={{
                     marginBottom: 0,
                     color: "#ff5f52",
@@ -18,7 +23,7 @@ export default function MenuCardNote({ onDelete, onArchive, archived, id }) {
                 Delete
             </Text>
             <Text
-                onClick={(e) => onArchive(e, id)}
+                onClick={(e) => onArchiveNote(e, id)}
                 style={{
                     marginBottom: 0,
                     color: "#2d3e50",

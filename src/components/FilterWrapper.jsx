@@ -1,7 +1,7 @@
 import React from "react";
 import FilterButton from "./FilterButton";
 
-export default function FilterWrapper({ filters, setFilter, currentFilter }) {
+export default function FilterWrapper({ filters, onSetFilterNotes, currentFilter }) {
     return (
         <div className="filter-wrapper">
             {filters.map((filter) => (
@@ -9,7 +9,7 @@ export default function FilterWrapper({ filters, setFilter, currentFilter }) {
                     key={filter.value}
                     {...filter}
                     currentFilter={currentFilter}
-                    setFilter={setFilter}
+                    onSetFilterNotes={onSetFilterNotes}
                     style={{ background: filter.color }}
                 >
                     {filter.text}

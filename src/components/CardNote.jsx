@@ -11,14 +11,14 @@ export default function CardNote({
     archived,
     id,
     idMenuActive,
-    onOpenDetail,
-    onOpenMenu,
-    onDelete,
-    onArchive,
+    onOpenDetailNote,
+    onOpenMenuNote,
+    onDeleteNote,
+    onArchiveNote,
 }) {
     return (
         <Box
-            onClick={() => onOpenDetail(id)}
+            onClick={() => onOpenDetailNote(id)}
             style={{
                 padding: "12px 12px 26px",
                 gap: "8px",
@@ -29,8 +29,8 @@ export default function CardNote({
         >
             {idMenuActive === id && (
                 <MenuCardNote
-                    onDelete={onDelete}
-                    onArchive={onArchive}
+                    onDeleteNote={onDeleteNote}
+                    onArchiveNote={onArchiveNote}
                     archived={archived}
                     id={id}
                 />
@@ -40,7 +40,7 @@ export default function CardNote({
                     {title}
                 </Text>
                 <img
-                    onClick={(e) => onOpenMenu(e, id)}
+                    onClick={(e) => onOpenMenuNote(e, id)}
                     src="assets/menu-three-dot.png"
                     alt="Menu"
                 />

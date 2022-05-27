@@ -34,7 +34,7 @@ export default class NewNote extends Component {
             description: "",
             chartLeft: 50,
         });
-        this.props.handleOpenAddNote();
+        this.props.onOpenAddNote();
     }
 
     render() {
@@ -42,7 +42,7 @@ export default class NewNote extends Component {
             <>
                 <div
                     className="shadow-overlay"
-                    onClick={this.props.handleOpenAddNote}
+                    onClick={this.props.onOpenAddNote}
                 />
                 <div className="new-note-wrapper">
                     <Text

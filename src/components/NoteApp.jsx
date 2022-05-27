@@ -27,28 +27,27 @@ export default class NoteApp extends Component {
             isLoading: true,
         };
 
-        this.onSearchHandleEvent = this.onSearchHandleEvent.bind(this);
+        this.onSearchNoteHandler = this.onSearchNoteHandler.bind(this);
         this.searchNotesByKeyword = this.searchNotesByKeyword.bind(this);
-        this.onAddNewNote = this.onAddNewNote.bind(this);
-        this.onEditNote = this.onEditNote.bind(this);
-        this.handleOpenAddNote = this.handleOpenAddNote.bind(this);
-        this.handleOpenEditNote = this.handleOpenEditNote.bind(this);
-        this.handleOpenMenuNote = this.handleOpenMenuNote.bind(this);
-        this.onDeleteNoteEventHandle = this.onDeleteNoteEventHandle.bind(this);
-        this.onArchiveNoteEventHandler =
-            this.onArchiveNoteEventHandler.bind(this);
-        this.onSetFilterNotes = this.onSetFilterNotes.bind(this);
-        this.handleOpenDetailNote = this.handleOpenDetailNote.bind(this);
+        this.onAddNewNoteHandler = this.onAddNewNoteHandler.bind(this);
+        this.onEditNoteHandler = this.onEditNoteHandler.bind(this);
+        this.onOpenAddNoteHandler = this.onOpenAddNoteHandler.bind(this);
+        this.onOpenEditNoteHandler = this.onOpenEditNoteHandler.bind(this);
+        this.onOpenMenuNoteHandler = this.onOpenMenuNoteHandler.bind(this);
+        this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this);
+        this.onArchiveNoteHandler = this.onArchiveNoteHandler.bind(this);
+        this.onSetFilterNotesHandler = this.onSetFilterNotesHandler.bind(this);
+        this.onOpenDetailNoteHandler = this.onOpenDetailNoteHandler.bind(this);
         this.generateRandomQuotes = this.generateRandomQuotes.bind(this);
         this.setTimeLoading = this.setTimeLoading.bind(this);
     }
 
-    onSearchHandleEvent(event) {
+    onSearchNoteHandler(event) {
         const keyword = event.target.value;
         this.setTimeLoading(1000);
 
         if (keyword.length === 0)
-            return this.onSetFilterNotes(this.state.filterNote);
+            return this.onSetFilterNotesHandler(this.state.filterNote);
 
         const searchNotes = this.state.displayNotes.filter((note) =>
             this.searchNotesByKeyword(note.title, keyword)
@@ -73,7 +72,7 @@ export default class NoteApp extends Component {
         return true;
     }
 
-    onAddNewNote(event, note) {
+    onAddNewNoteHandler(event, note) {
         event.preventDefault();
         this.setTimeLoading(1000);
 
@@ -93,14 +92,14 @@ export default class NoteApp extends Component {
         }));
     }
 
-    handleOpenAddNote() {
+    onOpenAddNoteHandler() {
         this.setState((prevState) => ({
             ...prevState,
             isAddNote: !prevState.isAddNote,
         }));
     }
 
-    onEditNote(event, note) {
+    onEditNoteHandler(event, note) {
         event.preventDefault();
         const notes = this.state.notes.filter(
             (prevNote) => prevNote.id !== note.id
@@ -123,7 +122,7 @@ export default class NoteApp extends Component {
         }));
     }
 
-    handleOpenEditNote() {
+    onOpenEditNoteHandler() {
         this.setState((prevState) => ({
             ...prevState,
             isEditNote: !prevState.isEditNote,
@@ -131,7 +130,7 @@ export default class NoteApp extends Component {
         }));
     }
 
-    handleOpenMenuNote(event, id) {
+    onOpenMenuNoteHandler(event, id) {
         event.stopPropagation();
 
         this.setState((prevState) => ({
@@ -140,7 +139,7 @@ export default class NoteApp extends Component {
         }));
     }
 
-    onDeleteNoteEventHandle(event, id) {
+    onDeleteNoteHandler(event, id) {
         event.stopPropagation();
         this.setTimeLoading(1000);
 
@@ -153,7 +152,7 @@ export default class NoteApp extends Component {
         }));
     }
 
-    onArchiveNoteEventHandler(event, id) {
+    onArchiveNoteHandler(event, id) {
         event.stopPropagation();
         const noteAfterArchive = this.state.notes.map((note) => ({
             ...note,
@@ -166,7 +165,7 @@ export default class NoteApp extends Component {
         }));
     }
 
-    onSetFilterNotes(filter) {
+    onSetFilterNotesHandler(filter) {
         this.setTimeLoading(1000);
 
         let filterNotes = [];
@@ -198,7 +197,7 @@ export default class NoteApp extends Component {
         }));
     }
 
-    handleOpenDetailNote(id) {
+    onOpenDetailNoteHandler(id) {
         if (id === null) {
             return this.setState((prevState) => ({
                 ...prevState,
@@ -239,12 +238,12 @@ export default class NoteApp extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         if (prevState.notes !== this.state.notes) {
-            this.onSetFilterNotes(this.state.filterNote);
+            this.onSetFilterNotesHandler(this.state.filterNote);
         }
     }
 
     componentDidMount() {
-        this.onSetFilterNotes(this.state.filterNote);
+        this.onSetFilterNotesHandler(this.state.filterNote);
         this.generateRandomQuotes();
     }
 
@@ -253,49 +252,49 @@ export default class NoteApp extends Component {
             <>
                 {this.state.isAddNote && (
                     <NewNote
-                        onSubmitNewNote={this.onAddNewNote}
-                        handleOpenAddNote={this.handleOpenAddNote}
+                        onSubmitNewNote={this.onAddNewNoteHandler}
+                        onOpenAddNote={this.onOpenAddNoteHandler}
                     />
                 )}
                 {this.state.isEditNote && (
                     <EditNote
                         {...this.state.detailNote}
-                        onSubmitEditNote={this.onEditNote}
-                        handleOpenEditNote={this.handleOpenEditNote}
+                        onSubmitEditNote={this.onEditNoteHandler}
+                        onOpenEditNote={this.onOpenEditNoteHandler}
                     />
                 )}
                 {this.state.isOpenNote && (
                     <DetailNote
-                        handleOpenDetailNote={this.handleOpenDetailNote}
-                        onEditNote={this.handleOpenEditNote}
+                        onOpenDetailNote={this.onOpenDetailNoteHandler}
+                        onEditNote={this.onOpenEditNoteHandler}
                         {...this.state.detailNote}
                     />
                 )}
                 <div className="container-wrapper">
                     <Header
                         keyword={this.state.keyword}
-                        onSearchHandleEvent={this.onSearchHandleEvent}
+                        onSearchNote={this.onSearchNoteHandler}
                         {...this.state.quotes}
                     />
                     <div className="body-wrapper">
                         <FilterWrapper
                             filters={getFilter()}
                             currentFilter={this.state.filterNote}
-                            setFilter={this.onSetFilterNotes}
+                            onSetFilterNotes={this.onSetFilterNotesHandler}
                         />
                         <WrapCardNote
                             textEmpty={this.state.textEmpty}
                             loading={this.state.isLoading}
                             notes={this.state.displayNotes}
-                            onOpenDetail={this.handleOpenDetailNote}
-                            onDelete={this.onDeleteNoteEventHandle}
-                            onArchive={this.onArchiveNoteEventHandler}
-                            onOpenMenu={this.handleOpenMenuNote}
+                            onOpenDetailNote={this.onOpenDetailNoteHandler}
+                            onDeleteNote={this.onDeleteNoteHandler}
+                            onArchiveNote={this.onArchiveNoteHandler}
+                            onOpenMenuNote={this.onOpenMenuNoteHandler}
                             idMenuActive={this.state.idMenuActive}
                         />
                     </div>
                     <Footer />
-                    <ButtonAddNewNote onClick={this.handleOpenAddNote} />
+                    <ButtonAddNewNote onClick={this.onOpenAddNoteHandler} />
                 </div>
             </>
         );

@@ -36,7 +36,7 @@ export default class NewNote extends Component {
             <>
                 <div
                     className="shadow-overlay"
-                    onClick={this.props.handleOpenEditNote}
+                    onClick={this.props.onOpenEditNote}
                 />
                 <div className="new-note-wrapper edit-note">
                     <Text
@@ -67,7 +67,7 @@ export default class NewNote extends Component {
                         onInputEventHandler={this.onInputEventHandler}
                         onSubmitEditNote={(event) => {
                             this.props.onSubmitEditNote(event, this.state);
-                            this.props.handleOpenEditNote();
+                            this.props.onOpenEditNote();
                         }}
                     />
                 </div>

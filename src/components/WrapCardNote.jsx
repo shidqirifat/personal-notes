@@ -8,10 +8,10 @@ export default function WrapCardNote({
     textEmpty,
     notes,
     idMenuActive,
-    onOpenDetail,
-    onOpenMenu,
-    onDelete,
-    onArchive,
+    onOpenDetailNote,
+    onOpenMenuNote,
+    onDeleteNote,
+    onArchiveNote,
 }) {
     return (
         <>
@@ -26,10 +26,10 @@ export default function WrapCardNote({
                             key={note.id}
                             {...note}
                             idMenuActive={idMenuActive}
-                            onOpenDetail={onOpenDetail}
-                            onOpenMenu={onOpenMenu}
-                            onDelete={onDelete}
-                            onArchive={onArchive}
+                            onOpenDetailNote={onOpenDetailNote}
+                            onOpenMenuNote={onOpenMenuNote}
+                            onDeleteNote={onDeleteNote}
+                            onArchiveNote={onArchiveNote}
                         />
                     ))}
                 </div>

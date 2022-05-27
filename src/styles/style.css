@@ -264,7 +264,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .footer-container {
-  margin-top: 40px;
+  padding-top: 40px;
   display: flex;
   flex-direction: column;
   gap: 6px;
