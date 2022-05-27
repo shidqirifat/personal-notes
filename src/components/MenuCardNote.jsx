@@ -1,7 +1,7 @@
 import React from "react";
 import Text from "./Text";
 
-export default function MenuCardNote({ onDelete, onArchive, id }) {
+export default function MenuCardNote({ onDelete, onArchive, archived, id }) {
     return (
         <div className="wrap-menu-card">
             <Text
@@ -27,7 +27,7 @@ export default function MenuCardNote({ onDelete, onArchive, id }) {
                 }}
                 type="text-action"
             >
-                Archive
+                {archived ? "Unarchive" : "Archive"}
             </Text>
         </div>
     );

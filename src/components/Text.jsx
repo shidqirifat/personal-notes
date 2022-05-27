@@ -27,6 +27,12 @@ export default function Text({ type, style, children, onClick }) {
                     {children}
                 </p>
             );
+        case "text-note":
+            return (
+                <p onClick={onClick} className={type} style={style}>
+                    {children}
+                </p>
+            );
         case "text-date":
             return (
                 <p onClick={onClick} className={type} style={style}>

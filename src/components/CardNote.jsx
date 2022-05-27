@@ -20,16 +20,18 @@ export default function CardNote({
         <Box
             onClick={() => onOpenDetail(id)}
             style={{
-                padding: "12px",
+                padding: "12px 12px 26px",
                 gap: "8px",
                 position: "relative",
                 cursor: "pointer",
+                boxShadow: "rgba(17, 12, 46, 0.05) 0px 2px 20px 0px",
             }}
         >
             {idMenuActive === id && (
                 <MenuCardNote
                     onDelete={onDelete}
                     onArchive={onArchive}
+                    archived={archived}
                     id={id}
                 />
             )}
@@ -66,7 +68,7 @@ export default function CardNote({
                     </Text>
                 )}
             </div>
-            <Text type="paragraph">{body}</Text>
+            <Text type="text-note">{body}</Text>
         </Box>
     );
 }

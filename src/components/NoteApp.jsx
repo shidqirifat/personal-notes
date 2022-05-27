@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { getFilter, getInitialData } from "../utils";
+import { generateQuotes, getFilter, getInitialData } from "../utils";
 import ButtonAddNewNote from "./ButtonAddNewNote";
 import DetailNote from "./DetailNote";
 import FilterWrapper from "./FilterWrapper";
 import Header from "./Header";
 import NewNote from "./NewNote";
+import EditNote from "./EditNote";
 import WrapCardNote from "./WrapCardNote";
 
 export default class NoteApp extends Component {
@@ -16,7 +17,10 @@ export default class NoteApp extends Component {
             detailNote: {},
             filterNote: "all",
             textEmpty: "Kamu Belum Memiliki Catatan",
+            keyword: "",
+            quotes: {},
             isAddNote: false,
+            isEditNote: false,
             isOpenNote: false,
             idMenuActive: null,
             isLoading: true,
@@ -25,27 +29,38 @@ export default class NoteApp extends Component {
         this.onSearchHandleEvent = this.onSearchHandleEvent.bind(this);
         this.searchNotesByKeyword = this.searchNotesByKeyword.bind(this);
         this.onAddNewNote = this.onAddNewNote.bind(this);
+        this.onEditNote = this.onEditNote.bind(this);
         this.handleOpenAddNote = this.handleOpenAddNote.bind(this);
+        this.handleOpenEditNote = this.handleOpenEditNote.bind(this);
         this.handleOpenMenuNote = this.handleOpenMenuNote.bind(this);
         this.onDeleteNoteEventHandle = this.onDeleteNoteEventHandle.bind(this);
         this.onArchiveNoteEventHandler =
             this.onArchiveNoteEventHandler.bind(this);
         this.onSetFilterNotes = this.onSetFilterNotes.bind(this);
         this.handleOpenDetailNote = this.handleOpenDetailNote.bind(this);
+        this.generateRandomQuotes = this.generateRandomQuotes.bind(this);
         this.setTimeLoading = this.setTimeLoading.bind(this);
     }
 
-    onSearchHandleEvent(keyword) {
+    onSearchHandleEvent(event) {
+        const keyword = event.target.value;
         this.setTimeLoading(1000);
+
         if (keyword.length === 0)
             return this.onSetFilterNotes(this.state.filterNote);
 
         const searchNotes = this.state.displayNotes.filter((note) =>
             this.searchNotesByKeyword(note.title, keyword)
         );
+
         this.setState((prevState) => ({
             ...prevState,
+            keyword,
             displayNotes: searchNotes,
+            textEmpty:
+                keyword.length > 0
+                    ? "Catatan Yang Dicari Tidak Ditemukan"
+                    : "Kamu Belum Memiliki Catatan",
         }));
     }
 
@@ -73,6 +88,7 @@ export default class NoteApp extends Component {
                     archived: false,
                 },
             ],
+            keyword: "",
         }));
     }
 
@@ -80,6 +96,37 @@ export default class NoteApp extends Component {
         this.setState((prevState) => ({
             ...prevState,
             isAddNote: !prevState.isAddNote,
+        }));
+    }
+
+    onEditNote(event, note) {
+        event.preventDefault();
+        const notes = this.state.notes.filter(
+            (prevNote) => prevNote.id !== note.id
+        );
+        this.setTimeLoading(1000);
+
+        this.setState((prevState) => ({
+            ...prevState,
+            notes: [
+                ...notes,
+                {
+                    id: note.id,
+                    title: note.title,
+                    body: note.description,
+                    createdAt: note.createdAt,
+                    archived: note.archived,
+                },
+            ],
+            keyword: "",
+        }));
+    }
+
+    handleOpenEditNote() {
+        this.setState((prevState) => ({
+            ...prevState,
+            isEditNote: !prevState.isEditNote,
+            isOpenNote: false,
         }));
     }
 
@@ -109,7 +156,7 @@ export default class NoteApp extends Component {
         event.stopPropagation();
         const noteAfterArchive = this.state.notes.map((note) => ({
             ...note,
-            archived: note.id === id ? true : note.archived,
+            archived: note.id === id ? !note.archived : note.archived,
         }));
         this.setState((prevState) => ({
             ...prevState,
@@ -146,6 +193,7 @@ export default class NoteApp extends Component {
             displayNotes: filterNotes,
             filterNote: filter,
             textEmpty,
+            keyword: "",
         }));
     }
 
@@ -163,6 +211,15 @@ export default class NoteApp extends Component {
             ...prevState,
             detailNote,
             isOpenNote: true,
+        }));
+    }
+
+    generateRandomQuotes() {
+        const allQuotes = generateQuotes();
+        const quotes = allQuotes[Math.floor(Math.random() * allQuotes.length)];
+        this.setState((prevState) => ({
+            ...prevState,
+            quotes,
         }));
     }
 
@@ -187,6 +244,7 @@ export default class NoteApp extends Component {
 
     componentDidMount() {
         this.onSetFilterNotes(this.state.filterNote);
+        this.generateRandomQuotes();
     }
 
     render() {
@@ -198,14 +256,26 @@ export default class NoteApp extends Component {
                         handleOpenAddNote={this.handleOpenAddNote}
                     />
                 )}
+                {this.state.isEditNote && (
+                    <EditNote
+                        {...this.state.detailNote}
+                        onSubmitEditNote={this.onEditNote}
+                        handleOpenEditNote={this.handleOpenEditNote}
+                    />
+                )}
                 {this.state.isOpenNote && (
                     <DetailNote
                         handleOpenDetailNote={this.handleOpenDetailNote}
+                        onEditNote={this.handleOpenEditNote}
                         {...this.state.detailNote}
                     />
                 )}
                 <div className="container-wrapper">
-                    <Header onSearchHandleEvent={this.onSearchHandleEvent} />
+                    <Header
+                        keyword={this.state.keyword}
+                        onSearchHandleEvent={this.onSearchHandleEvent}
+                        {...this.state.quotes}
+                    />
                     <div className="body-wrapper">
                         <FilterWrapper
                             filters={getFilter()}

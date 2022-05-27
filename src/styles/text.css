@@ -21,6 +21,18 @@
 .paragraph {
     color: #3F3F45;
     font-size: 0.9rem;
+    line-height: 22px;
+}
+.text-note {
+    color: #3F3F45;
+    font-size: 0.9rem;
+    line-height: 21px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    line-clamp: 8;
+    -webkit-box-orient: vertical;
 }
 .text-date {
     color: rgb(139, 139, 139);

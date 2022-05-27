@@ -7,6 +7,7 @@ export default function ButtonAction({
     onClick,
     style,
     children,
+    isPrimary
 }) {
     return (
         <button
@@ -14,7 +15,7 @@ export default function ButtonAction({
             onClick={onClick}
             style={style}
             disabled={type === "submit" && (title === "" || description === "")}
-            className="button-submit"
+            className={`${isPrimary ? 'button-submit' : 'button-secondary'}`}
         >
             {children}
         </button>

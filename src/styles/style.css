@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400&family=Open+Sans:wght@400;600;700&display=swap');
 
 * {
   padding: 0;
@@ -109,14 +109,13 @@ input::placeholder, textarea::placeholder {
 }
 
 .container-wrapper {
-  margin: 15px auto;
+  margin: 15px auto 40px;
   padding: 0 20px;
 }
 
 .body-wrapper {
   max-width: 1000px;
   margin: 15px auto;
-  padding: 0 20px;
 }
 
 .shadow-overlay {
@@ -133,6 +132,7 @@ input::placeholder, textarea::placeholder {
 }
 
 .detail-note {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -151,6 +151,10 @@ input::placeholder, textarea::placeholder {
   background-color: #fff;
   border-radius: 8px;
   animation: fadeUp forwards 1 300ms ease-in-out;
+}
+
+.edit-note {
+  z-index: 4;
 }
 
 @keyframes fadeUp {
@@ -182,10 +186,10 @@ input::placeholder, textarea::placeholder {
   margin: 0 auto;
 }
 
-.button-submit {
+.button-submit,
+.button-secondary {
   padding: 8px;
   border-radius: 4px;
-  background-color: transparent;
   cursor: pointer;
   font-weight: 700;
   background-color: #2d3e50;
@@ -199,6 +203,16 @@ input::placeholder, textarea::placeholder {
   color: #fff;
   background-color: #1f2b38;
   border-color: #1b252f;
+}
+
+.button-secondary {
+  background-color: transparent;
+  border-color: #2d3e50;
+  color: #2d2d2d;
+}
+
+.button-secondary:hover {
+  background-color: #f4f4f5;
 }
 
 .button-submit:disabled {
@@ -234,14 +248,33 @@ input::placeholder, textarea::placeholder {
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(109deg) brightness(107%) contrast(101%);
 }
 
-/* .all {
-  background-color: #EB5353;
+.quotes-wrapper {
+  max-width: 400px;
+  width: 92%;
+  margin: 0 auto;
+  font-family: 'Kalam', cursive;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.active {
-  background-color: #F9D923;
+.button-action-wrapper {
+  display: flex;
+  gap: 8px;
 }
 
-.archived {
-  background-color: #36AE7C;
-} */
+@media only screen and (max-width: 768px) {
+  .wrapper-box-notes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .wrapper-box-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-button {
+    padding: 8px 10px;
+  }
+}

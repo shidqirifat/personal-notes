@@ -5,6 +5,7 @@ import Text from "./Text";
 
 export default function DetailNote({
     handleOpenDetailNote,
+    onEditNote,
     title,
     createdAt,
     body,
@@ -49,12 +50,22 @@ export default function DetailNote({
                     </div>
                     <Text type="paragraph">{body}</Text>
                 </div>
-                <ButtonAction
-                    style={{ width: "max-content" }}
-                    onClick={() => handleOpenDetailNote(null)}
-                >
-                    Close
-                </ButtonAction>
+                <div className="button-action-wrapper">
+                    <ButtonAction
+                        style={{ width: "max-content", padding: "8px 16px" }}
+                        onClick={onEditNote}
+                        isPrimary={false}
+                    >
+                        Edit
+                    </ButtonAction>
+                    <ButtonAction
+                        style={{ width: "max-content", padding: "8px 16px" }}
+                        onClick={() => handleOpenDetailNote(null)}
+                        isPrimary
+                    >
+                        Close
+                    </ButtonAction>
+                </div>
             </div>
         </>
     );
